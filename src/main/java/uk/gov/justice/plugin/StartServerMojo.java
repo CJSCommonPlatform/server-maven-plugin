@@ -148,7 +148,6 @@ public class StartServerMojo extends AbstractMojo {
         // !!! cannot write lambdas in plugins it fails
         // java.lang.ArrayIndexOutOfBoundsException: 5377
         waitThread = new Thread(new Runnable() {
-
             public void run() {
                 try (final ServerSocket ssocket = new ServerSocket(getPort())) {
                     boolean flag = false;
@@ -173,9 +172,7 @@ public class StartServerMojo extends AbstractMojo {
                 try {
                     destroyIfAlive(process);
                 } catch (Exception e) {
-                    if (!Objects.isNull(process) && process.isAlive()) {
-                        process.destroyForcibly();
-                    }
+                    destroyForciblyIfAlive(process);
                 }
             }
         }));

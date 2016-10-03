@@ -1,7 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
+	<parent>
+		<groupId>uk.gov.justice</groupId>
+		<artifactId>parent-pom</artifactId>
+		<version>1.6.11</version>
+	</parent>
 	<groupId>uk.gov.justice.plugin</groupId>
 	<artifactId>server-maven-plugin</artifactId>
 	<version>0.1-SNAPSHOT</version>
@@ -20,6 +24,24 @@
 		<maven-compat.version>3.2.1</maven-compat.version>
 		<maven-plugin-plugin.version>3.2</maven-plugin-plugin.version>
 	</properties>
+
+	<scm>
+		<connection>scm:git:git@github.com:CJSCommonPlatform/server-maven-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com:CJSCommonPlatform/server-maven-plugin.git
+        </developerConnection>
+	</scm>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>uk.gov.justice</groupId>
+				<artifactId>common-bom</artifactId>
+				<version>1.6.10</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<dependency>
@@ -45,6 +67,16 @@
 			<artifactId>maven-core</artifactId>
 			<version>${maven.version}</version>
 			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.codehaus.plexus</groupId>
+					<artifactId>plexus-classworlds</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.maven</groupId>
+					<artifactId>maven-plugin-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
@@ -80,6 +112,14 @@
 				<configuration>
 					<skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eluder.coveralls</groupId>
+				<artifactId>coveralls-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
