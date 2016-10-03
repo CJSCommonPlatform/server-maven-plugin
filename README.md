@@ -1,11 +1,12 @@
-# server-maven-plugin
+# Server Maven Plugin
+
+[![Build Status](https://travis-ci.org/CJSCommonPlatform/server-maven-plugin.svg?branch=master)](https://travis-ci.org/CJSCommonPlatform/server-maven-plugin) [![Coverage Status](https://coveralls.io/repos/github/CJSCommonPlatform/server-maven-plugin/badge.svg?branch=master)](https://coveralls.io/github/CJSCommonPlatform/server-maven-plugin?branch=master)
 
 A maven plugin that can be used to start and stop a server (like embedded Artemis) within a maven test cycle.
 
 ##Example usage in pom.xml
 
-~~~~
-<code>
+```xml
     <plugin>
 	<groupId>uk.gov.justice.plugin</groupId>
 	<artifactId>server-maven-plugin</artifactId>
@@ -37,8 +38,7 @@ A maven plugin that can be used to start and stop a server (like embedded Artemi
 		</dependency>
 	</dependencies>
     </plugin>
-</code>
-~~~~
+```
 
 The plugin starts a server using the supplied serverClass during the process-test-classes phase and shuts it down during the verify phase.
 
