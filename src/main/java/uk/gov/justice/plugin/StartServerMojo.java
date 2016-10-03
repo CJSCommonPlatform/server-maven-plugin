@@ -96,10 +96,7 @@ public class StartServerMojo extends AbstractMojo {
     public void execute() throws MojoExecutionException {
         try {
             final File java = new File(new File(System.getProperty("java.home"), "bin"), "java");
-            if (!java.exists()) {
-                throw new MojoExecutionException("Please set java.home to a valid location");
-            }
-
+            
             final List<String> args = new ArrayList<String>();
             args.add(java.getAbsolutePath());
             args.add("-cp");

@@ -20,7 +20,6 @@ public class StopServerMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}", readonly = true)
     protected MavenProject project;
 
-
     public MavenProject getProject() {
         return project;
     }
