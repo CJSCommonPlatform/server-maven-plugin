@@ -33,13 +33,12 @@ public class StartServerMojo extends AbstractMojo {
      */
     @Parameter(property = "port", required = true)
     protected int port;
-
     /**
      * The class to run in a process
      */
     @Parameter(property = "serverClass", required = true)
     protected String serverClass;
-
+    
     @Parameter(defaultValue = "${localRepository}", readonly = true, required = true)
     private ArtifactRepository local;
 
@@ -107,10 +106,6 @@ public class StartServerMojo extends AbstractMojo {
             args.add(buildClasspath());
             args.add(getServerClass());
 
-            System.out.println("------------------");
-            System.out.println(args);
-            System.out.println("------------------");
-
             final Process p = new ProcessBuilder(args).start();
             dumpStream(p.getInputStream(), System.out);
             dumpStream(p.getErrorStream(), System.err);
@@ -118,7 +113,6 @@ public class StartServerMojo extends AbstractMojo {
             waitOnStopCommand(p);
 
         } catch (Exception e) {
-
             throw new RuntimeException(e);
         }
     }
