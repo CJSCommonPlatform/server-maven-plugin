@@ -38,7 +38,7 @@ public class StartServerMojo extends AbstractMojo {
      */
     @Parameter(property = "serverClass", required = true)
     protected String serverClass;
-    
+
     @Parameter(defaultValue = "${localRepository}", readonly = true, required = true)
     private ArtifactRepository local;
 
@@ -93,12 +93,12 @@ public class StartServerMojo extends AbstractMojo {
     private Thread waitThread;
 
     private File java;
-    
+
     @Override
     public void execute() throws MojoExecutionException {
         try {
             java = new File(new File(System.getProperty("java.home"), "bin"), "java");
-            
+
             final List<String> args = new ArrayList<String>();
             args.add(java.getAbsolutePath());
             args.add("-cp");
@@ -146,7 +146,7 @@ public class StartServerMojo extends AbstractMojo {
         return String.join(separator, runtimeLocs);
     }
 
-    public void waitOnStopCommand(final Process process) throws IOException {
+    private void waitOnStopCommand(final Process process) throws IOException {
         // !!! cannot write lambdas in plugins it fails
         // java.lang.ArrayIndexOutOfBoundsException: 5377
         waitThread = new Thread(new Runnable() {
@@ -210,5 +210,5 @@ public class StartServerMojo extends AbstractMojo {
     public void setJava(File java) {
         this.java = java;
     }
-    
+
 }

@@ -1,5 +1,6 @@
 package uk.gov.justice.plugin;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -15,7 +16,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-
 
 @RunWith(MockitoJUnitRunner.class)
 public class StartServerMojoTest {
@@ -51,6 +51,57 @@ public class StartServerMojoTest {
 
         startServerMojo.execute();
 
+    }
+
+    @Test
+    public void testGetProject() {
+        startServerMojo.setProject(project);
+        assertEquals(project, startServerMojo.getProject());
+    }
+
+    @Test
+    public void testSetProject() {
+        startServerMojo.setProject(project);
+        assertEquals(project, startServerMojo.getProject());
+    }
+
+    @Test
+    public void testGetPort() {
+        startServerMojo.setPort(9000);
+        assertEquals(9000, startServerMojo.getPort());
+    }
+
+    @Test
+    public void testSetPort() {
+        startServerMojo.setPort(9000);
+        assertEquals(9000, startServerMojo.getPort());
+    }
+
+    @Test
+    public void testGetServerClass() {
+        startServerMojo.setServerClass(this.getClass().getName());
+        assertEquals(this.getClass().getName(), startServerMojo.getServerClass());
+    }
+
+    @Test
+    public void testSetServerClass() {
+        startServerMojo.setServerClass(this.getClass().getName());
+        assertEquals(this.getClass().getName(), startServerMojo.getServerClass());
+    }
+
+    
+    @Test
+    public void testGetJava() {
+        File f = mock(File.class);
+        startServerMojo.setJava(f);
+        assertEquals(f, startServerMojo.getJava());
+    }
+
+    @Test
+    public void testSetJava() {
+        File f = mock(File.class);
+        startServerMojo.setJava(f);
+        assertEquals(f, startServerMojo.getJava());
     }
 
 }
