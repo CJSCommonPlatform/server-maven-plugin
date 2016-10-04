@@ -20,6 +20,7 @@ public class StopServerMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project}", readonly = true)
     protected MavenProject project;
 
+    
     public MavenProject getProject() {
         return project;
     }
@@ -36,6 +37,7 @@ public class StopServerMojo extends AbstractMojo {
         this.port = port;
     }
 
+    
     @Override
     public void execute() throws MojoExecutionException {
         try (final Socket clientSocket = new Socket("localhost", getPort())) {

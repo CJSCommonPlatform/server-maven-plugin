@@ -92,10 +92,12 @@ public class StartServerMojo extends AbstractMojo {
 
     private Thread waitThread;
 
+    private File java;
+    
     @Override
     public void execute() throws MojoExecutionException {
         try {
-            final File java = new File(new File(System.getProperty("java.home"), "bin"), "java");
+            java = new File(new File(System.getProperty("java.home"), "bin"), "java");
             
             final List<String> args = new ArrayList<String>();
             args.add(java.getAbsolutePath());
@@ -103,11 +105,11 @@ public class StartServerMojo extends AbstractMojo {
             args.add(buildClasspath());
             args.add(getServerClass());
 
-            final Process p = new ProcessBuilder(args).start();
-            dumpStream(p.getInputStream(), System.out);
-            dumpStream(p.getErrorStream(), System.err);
-            addShutdownHook(p);
-            waitOnStopCommand(p);
+            final Process process = new ProcessBuilder(args).start();
+            dumpStream(process.getInputStream(), System.out);
+            dumpStream(process.getErrorStream(), System.err);
+            addShutdownHook(process);
+            waitOnStopCommand(process);
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -166,7 +168,6 @@ public class StartServerMojo extends AbstractMojo {
     }
 
     private void addShutdownHook(final Process process) {
-
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
                 try {
@@ -178,13 +179,13 @@ public class StartServerMojo extends AbstractMojo {
         }));
     }
 
-    private void destroyIfAlive(final Process process) {
+    private synchronized void destroyIfAlive(final Process process) {
         if (!Objects.isNull(process) && process.isAlive()) {
             process.destroy();
         }
     }
 
-    private void destroyForciblyIfAlive(final Process process) {
+    private synchronized void destroyForciblyIfAlive(final Process process) {
         if (!Objects.isNull(process) && process.isAlive()) {
             process.destroyForcibly();
         }
@@ -201,4 +202,13 @@ public class StartServerMojo extends AbstractMojo {
             }
         }).start();
     }
+
+    public File getJava() {
+        return java;
+    }
+
+    public void setJava(File java) {
+        this.java = java;
+    }
+    
 }
