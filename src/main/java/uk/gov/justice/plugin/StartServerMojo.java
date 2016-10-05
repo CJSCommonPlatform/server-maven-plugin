@@ -106,9 +106,9 @@ public class StartServerMojo extends AbstractMojo {
             args.add(getServerClass());
 
             final Process process = new ProcessBuilder(args).start();
+            addShutdownHook(process);
             dumpStream(process.getInputStream(), System.out);
             dumpStream(process.getErrorStream(), System.err);
-            addShutdownHook(process);
             waitOnStopCommand(process);
 
         } catch (Exception e) {
