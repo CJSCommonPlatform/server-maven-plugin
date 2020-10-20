@@ -1,5 +1,10 @@
 # Server Maven Plugin
 
+## Deprecated
+
+_**Pull requests against this project have been disabled. Please contact one of the project owners for emergency bug fixes on this version**_
+
+
 [![Build Status](https://travis-ci.org/CJSCommonPlatform/server-maven-plugin.svg?branch=master)](https://travis-ci.org/CJSCommonPlatform/server-maven-plugin) [![Coverage Status](https://coveralls.io/repos/github/CJSCommonPlatform/server-maven-plugin/badge.svg?branch=master)](https://coveralls.io/github/CJSCommonPlatform/server-maven-plugin?branch=master)
 
 A maven plugin that can be used to start and stop a server (like embedded Artemis) within a maven test cycle.
